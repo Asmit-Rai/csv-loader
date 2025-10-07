@@ -6,22 +6,29 @@ const CsvView = () => {
 
   useEffect(() => {
     const fetchCSV = async () => {
-      const response = await fetch("https://csv-loader-backend-9uya.onrender.com/get-csv-data");
-      const csvParseData = await response.json();
-      setData(csvParseData.csvData);
+      try {
+        const response = await fetch("https://csv-loader-backend-9uya.onrender.com/get-csv-data");
+        const csvParseData = await response.json();
+      
+        if (csvParseData.csvData && typeof csvParseData.csvData === 'string') {
+          setData(csvParseData.csvData);
+        } else {
+          console.error("Invalid CSV data received");
+        }
+      } catch (error) {
+        console.error("Error fetching CSV:", error);
+      }
     };
     fetchCSV();
   }, []);
 
-const lines = data ? data.trim().split("\n").filter(Boolean) : [];
-const headers = lines.length > 0 ? lines[0].split(",") : [];
-const rows = lines.length > 1 ? lines.slice(1).map(line => line.split(",")) : [];
-
+  const lines = data && typeof data === 'string' ? data.trim().split("\n").filter(Boolean) : [];
+  const headers = lines.length > 0 ? lines[0].split(",") : [];
+  const rows = lines.length > 1 ? lines.slice(1).map(line => line.split(",")) : [];
 
   return (
     <div className="csv-container">
       <div className="csv-card">
-
         {data ? (
           <table className="csv-table">
             <thead>
