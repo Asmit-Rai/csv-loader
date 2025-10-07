@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
 import "./App.css";
-import CsvView from "./pages/CSVView";
+import CsvView from "./pages/CsvView";
 
 function App() {
   const isLoggedIn = JSON.parse(sessionStorage.getItem("user"));
