@@ -17,7 +17,7 @@ const Home = () => {
       const csvText = event.target.result;
       setCsvData(csvText);
       try {
-        const response = await fetch("http://localhost:3000/csv-data", {
+        const response = await fetch("https://csv-loader-backend-jrqw-26vctln57-asmit-rais-projects.vercel.app/csv-data", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ csvData: csvText }),

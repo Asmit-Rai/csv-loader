@@ -6,7 +6,7 @@ const CsvView = () => {
 
   useEffect(() => {
     const fetchCSV = async () => {
-      const response = await fetch("http://localhost:3000/get-csv-data");
+      const response = await fetch("https://csv-loader-backend-jrqw-26vctln57-asmit-rais-projects.vercel.app/get-csv-data");
       const csvParseData = await response.json();
       setData(csvParseData.csvData);
     };
